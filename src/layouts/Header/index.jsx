@@ -5,10 +5,10 @@ const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   console.log("sd",location.pathname)
   return (
-    <header className="flex justify-center bg-black bg-opacity-40 h-20 items-center sticky top-0 z-50">
+    <header className="w-full flex justify-center bg-black bg-opacity-40  h-20 items-center  backdrop-blur-sm ">
       <div className="w-full max-w-6xl py-2">
-        <div className="mx-2 flex space-x-2 md:justify-between items-center">
-          <div className="" onClick={() => setMenuOpen(!menuOpen)}>
+        <div className="mx-0 flex space-x-2 md:space-x-0 md:justify-between items-center">
+          <div className="sm:hidden" onClick={() => setMenuOpen(!menuOpen)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -37,7 +37,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/"
-                      ? `text-indigo-500`
+                      ? `text-malibu underline underline-offset-4`
                       : ``
                   }
                 >
@@ -48,7 +48,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/about"
-                      ? `text-indigo-500`
+                      ? `text-malibu underline underline-offset-4`
                       : ``
                   }
                 >
@@ -59,7 +59,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/books"
-                      ? `text-indigo-500`
+                      ? `text-malibu underline underline-offset-4`
                       : ``
                   }
                 >
@@ -70,7 +70,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/library"
-                      ? `text-indigo-500`
+                      ? `text-malibu underline underline-offset-4`
                       : ``
                   }
                 >
@@ -81,7 +81,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/contact"
-                      ? `text-indigo-500`
+                      ? `text-malibu underline underline-offset-4`
                       : ``
                   }
                 >
@@ -116,7 +116,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/"
-                      ? `text-indigo-500`
+                      ? `text-malibu`
                       : ``, `border-b border-gray-200 pb-2 pt-4`
                   }
                 >
@@ -127,7 +127,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/about"
-                      ? `text-indigo-500`
+                      ? `text-malibu`
                       : ``, `border-b border-gray-300 pb-2`
                   }
                 >
@@ -138,7 +138,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/books"
-                      ? `text-indigo-500`
+                      ? `text-malibu`
                       : ``, `border-b border-gray-200 pb-2`
                   }
                 >
@@ -149,7 +149,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/library"
-                      ? `text-indigo-500`
+                      ? `text-malibu`
                       : ``, `border-b border-gray-200 pb-2`
                   }
                 >
@@ -160,7 +160,7 @@ const Header = () => {
                 <li
                   className={
                     location.pathname.toLowerCase() === "/contact"
-                      ? `text-indigo-500`
+                      ? `text-malibu`
                       : ``, `border-b border-gray-200 pb-2`
                   }
                 >

@@ -27,6 +27,6 @@ code {
 
 @layer base {
   li{
-    @apply hover:text-indigo-500;
+    @apply hover:text-malibu;
   }
 }

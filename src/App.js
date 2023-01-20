@@ -6,11 +6,12 @@ import Home from "./pages/Home";
 import Books from "./pages/Books";
 import Library from "./pages/Library";
 import Contact from "./pages/Contact";
+import Footer from "./layouts/Footer";
 function App() {
   return (
     <div className="App">
       <Router>
-        <div className="bg-[#2192FF]">
+        <div className="bg-[#2192FF] sticky top-0 z-50 bg-opacity-90" >
           <Header />
         </div>
         <Structure>
@@ -22,6 +23,7 @@ function App() {
             <Route path="/contact" element={<Contact />}></Route>
           </Routes>
         </Structure>
+        <div><Footer/></div>
       </Router>
     </div>
   );
