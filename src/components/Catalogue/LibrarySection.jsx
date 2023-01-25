@@ -16,10 +16,7 @@ function LibrarySection({title, sectionBooks}){
                   </div>
                   <div className=" flex justify-end">
                     <div className="space-y-4 w-1/2">
-                      <marquee className="hidden group-hover:block font-poppins-bold text-xl">
-                        {book.title}
-                      </marquee>
-                      <h3 className="group-hover:hidden font-poppins-bold text-xl truncate">
+                      <h3 className="font-poppins-bold text-xl truncate">
                       {book.title}
                     </h3>
                       <h5 className="text-xl">{book.authors[0].name}</h5>
