@@ -10,6 +10,10 @@
   font-family: "POPPINS-BOLD";
   src: url("../src/assets/fonts/poppins/Poppins-Bold.ttf");
 }
+@font-face {
+  font-family: "VIVA-BEAUTIFUL";
+  src: url("../src/assets/fonts/viva/vivaBeautiful.ttf");
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',

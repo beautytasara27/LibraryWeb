@@ -1,94 +1,145 @@
 import "./index.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import HomeImage2 from "../../assets/images/home_bg2.jpg";
+import BookService from "../../services/API/books.service";
+import LibrarySection from "../../components/Catalogue/LibrarySection";
 const Library = () => {
-  const [authors, setAuthors] = useState([
-    {
-      Name: "Julia Quinn",
-      Books: ["Romancing Mr Bridgerton", "Diamond of the first water"],
-    },
-    {
-      Name: "Dan Brown",
-      Books: ["Inferno", "Angels and Demons", "Digital Fortress"],
-    },
-    {
-      Name: "Robert Greene",
-      Books: ["The 48 Laws Of Power", "The Art of Seduction", "Mastery"],
-    },
+
+
+  const [searchBy, setSeachBy] = useState([
+    "Keyword",
+    "Author",
+    "Title"
   ]);
-  const [years, setYears] = useState(["2001", "2002", "2003", "2004"]);
-  const [isSelectAuthorOpen, setIsSelectAuthorOpen] = useState(true);
-  const [currentAuthor, setCurrentAuthor] = useState("Select Author");
-  const [isSelectYearOpen, setIsSelectYearOpen] = useState(true);
-  const [currentYear, setCurrentYear] = useState("Select Year");
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchItem, setSearchItem] = useState("Keyword");
+  const [bestSellers, setBestSellers] = useState(null);
+  const [librarianPicks, setLibrarianPicks] = useState(null);
+  const [topAuthor, setTopAuthor] = useState(null);
+  useEffect(() => {
+    GetBooks();
+    LibrarianPicks();
+    TopAuthor();
+
+  }, []);
+  const GetBooks = async () => {
+    const response = await BookService.GetBooksBySubject({
+      subject: "bestseller",
+    });
+    setBestSellers(response.works);
+  };
+  const LibrarianPicks = async () => {
+    const response = await BookService.GetBooksBySubject({
+      subject: "crime",
+    });
+    setLibrarianPicks(response.works.splice(1,6));
+  };
+  const TopAuthor = async () => {
+    const response = await BookService.GetBooksBySubject({
+      subject: "fantasy",
+    });
+    setTopAuthor(response.works.splice(1,6));
+  };
   return (
-    <div className="w-full">
-      <div className="w-full flex justify-between">
-        <div className="w-full max-w-6xl">
-          <div className="flex justify-end font-poppins-regular">
-            <div className="w-1/3">
-              <div className="p-5 text-black bg-white rounded-[50px] shadow-md h-screen">
-                <div className="relative">
-                  <h2 className="font-poppins-bold mb-4">Author</h2>
-                  <button
-                    className="mb-4 border w-full text-start pl-10 py-2"
-                    onClick={() => setIsSelectAuthorOpen(!isSelectAuthorOpen)}
+    <div
+      className="w-full"
+      style={{
+        backgroundImage: `url(${HomeImage2})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+    >
+      <div className="w-full flex justify-center">
+        <div className="w-full">
+          <div className="font-poppins-regular">
+            {!isSearchOpen && (
+              <div className="flex justify-end">
+                <div
+                  className=" flex space-x-3 bg-white bg-opacity-50 backdrop-blur-sm px-4 py-4 rounded-b-[10px]"
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                >
+                  <p>Show Search</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
                   >
-                    {currentAuthor}
-                  </button>
-                  {isSelectAuthorOpen && (
-                    <div className="shadow-md  border py-2 px-5 absolute top-[100px] w-full z-10 bg-white">
-                      <ul>
-                        <li
-                          className="border-b py-2 italic"
-                          onClick={() => setCurrentAuthor("Select Author")}
-                        >
-                          Reset
-                        </li>
-                        {authors.map((author) => (
-                          <li
-                            className="border-b py-2"
-                            onClick={() => setCurrentAuthor(author.Name)}
-                          >
-                            {author.Name}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                <div className="relative">
-                  <h2 className="font-poppins-bold mb-4">Year</h2>
-                  <button
-                    className="mb-4 border w-full text-start pl-10 py-2"
-                    onClick={() => setIsSelectYearOpen(!isSelectYearOpen)}
-                  >
-                    {currentYear}
-                  </button>
-                  {isSelectYearOpen && (
-                    <div className="shadow-md  border py-2 px-5 absolute top-[100px] w-full bg-white">
-                      <ul>
-                        <li
-                          className="border-b py-2 italic"
-                          onClick={() => setCurrentYear("Select Year")}
-                        >
-                          Reset
-                        </li>
-                        {years.map((year) => (
-                          <li
-                            className="border-b py-2"
-                            onClick={() => setCurrentAuthor(year)}
-                          >
-                            {year}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
                 </div>
               </div>
+            )}
+            {isSearchOpen && (
+              <div className="flex justify-center bg-white bg-opacity-50 backdrop-blur-sm">
+                <div className="p-10 text-black bg-white  shadow-md  w-2/3 my-10 rounded-[20px]">
+                  <div className="w-full relative">
+                    <h2 className="font-poppins-bold mb-4">Search by ...</h2>
+                    <div className="flex justify-between space-x-8">
+                      <select className="mb-4 border-2 bg-white border-black w-2/5 text-start pl-2 py-2 h-10">
+                        {searchBy.map((searchItem) => (
+                          <option
+                            className="py-2 "
+                            onClick={() => setSearchItem(searchItem)}
+                            key={searchItem}
+                          >
+                            {searchItem}
+                          </option>
+                        ))}
+                      </select>
+                      <input
+                        className="border-2 border-black w-full h-10 text-center"
+                        placeholder="Search"
+                      />
+                    </div>
+                  </div>
+                  <div className="flex justify-end">
+                    <button className=" py-3 px-10 my-6 lg:my-8 text-white bg-havelock hover:bg-black hover:text-white">
+                      Search
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            {isSearchOpen && (
+              <div className="flex justify-end backdrop-blur-sm">
+                <div
+                  className=" flex space-x-3 bg-white bg-opacity-50 backdrop-blur-sm px-4 py-4 rounded-b-[10px]"
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                >
+                  <p>Hide Search</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.5 15.75l7.5-7.5 7.5 7.5"
+                    />
+                  </svg>
+                </div>
+              </div>
+            )}
+            <div className="w-full backdrop-blur-sm flex justify-center ">
+              <h1 className="text-9xl font-viva-beautiful text-white italic">
+                Catologue
+              </h1>
             </div>
-            <div className="w-2/3"></div>
-            <div></div>
+            {bestSellers && <LibrarySection title={"New York Times Best Sellers"} sectionBooks={bestSellers}/>}
+            {librarianPicks && <LibrarySection title={"Crime"} sectionBooks={librarianPicks}/>}
+            {librarianPicks && <LibrarySection title={"Fantasy"} sectionBooks={topAuthor}/>}
+ 
           </div>
         </div>
       </div>

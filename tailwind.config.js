@@ -6,6 +6,7 @@ module.exports = {
       fontFamily: {
         "poppins-regular": ["Poppins", "sans-serif"],
         "poppins-bold": ["Poppins-Bold", "sans-serif"],
+        "viva-beautiful":["Viva-Beautiful", "sans-serif"],
       },
       colors: {
         malibu: "#79CBFB",
