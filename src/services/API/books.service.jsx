@@ -1,7 +1,7 @@
 async function GetBooksBySubject({ subject }) {
   try {
     const response = await fetch(
-      `http://openlibrary.org/subjects/${subject}.json?published_in=2021-2023`,
+      `https://openlibrary.org/subjects/${subject}.json?published_in=2021-2023`,
       {
         method: "GET",
       }
