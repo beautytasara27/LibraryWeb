@@ -24,8 +24,22 @@ async function GetBooksByAuthor() {
       return error.json();
     }
   }
+  async function GetBooksByKeywords() {
+    try {
+      const response = await fetch(
+        `https://openlibrary.org/search/authors.json?q=dan%20brown`,
+        {
+          method: "GET",
+        }
+      );
+      return response.json();
+    } catch (error) {
+      return error.json();
+    }
+  }
 const BookService = {
 GetBooksBySubject,
-GetBooksByAuthor
+GetBooksByAuthor,
+GetBooksByKeywords
 }
 export default BookService;
