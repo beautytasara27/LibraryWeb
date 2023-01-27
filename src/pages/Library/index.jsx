@@ -68,39 +68,39 @@ const Library = () => {
       <div className="w-full flex justify-center">
         <div className="w-full">
           <div className="font-poppins-regular w-full">
-            <Transition>
+            {!isSearchOpen && (
+              <div className="flex justify-end">
+                <div
+                  className=" flex space-x-3 bg-white bg-opacity-50 backdrop-blur-sm px-4 py-4 rounded-b-[10px]"
+                  onClick={() => setIsSearchOpen(!isSearchOpen)}
+                >
+                  <p>Show Search</p>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth="1.5"
+                    stroke="currentColor"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
+                    />
+                  </svg>
+                </div>
+              </div>
+            )}
+            <Transition show={isSearchOpen}>
               <Transition.Child
                 enter="transition ease-in-out duration-300 transform"
-                enterFrom="-translate-x-full"
-                enterTo="translate-x-0"
+                enterFrom="-translate-y-full"
+                enterTo="translate-y-0"
                 leave="transition ease-in-out duration-300 transform"
                 leaveFrom="translate-y-0"
                 leaveTo="-translate-y-full"
               >
-                {!isSearchOpen && (
-                  <div className="flex justify-end">
-                    <div
-                      className=" flex space-x-3 bg-white bg-opacity-50 backdrop-blur-sm px-4 py-4 rounded-b-[10px]"
-                      onClick={() => setIsSearchOpen(!isSearchOpen)}
-                    >
-                      <p>Show Search</p>
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth="1.5"
-                        stroke="currentColor"
-                        className="w-6 h-6"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-                        />
-                      </svg>
-                    </div>
-                  </div>
-                )}
                 {isSearchOpen && (
                   <div>
                     <div className="flex justify-center bg-white bg-opacity-50 backdrop-blur-sm">
@@ -169,7 +169,7 @@ const Library = () => {
               </Transition.Child>
             </Transition>
             {isSearchOpen && searched && (
-              <SearchResults results={searchResults} />
+              <SearchResults results={searchResults} searched={searched} />
             )}
 
             <div className="w-full backdrop-blur-sm flex justify-center ">
