@@ -48,14 +48,14 @@ function LibrarySection({ title, sectionBooks }) {
                       alt={`Showing cover for ${book.title}`}
                     />
                   </div>
-                  <div className=" flex justify-end">
+                  <div className="flex justify-end">
                     <div className="space-y-4 w-1/2">
                       <h3 className="font-poppins-bold text-lg truncate">
                         {book.title}
                       </h3>
                       <h5 className="text-base">{book.authors[0].name}</h5>
                       <div>
-                        <p className="p-2 text-center bg-purple-300 text-xs rounded-full">
+                        <p className="p-2 text-center bg-blizzard text-xs rounded-full">
                           {book.subject[0]}
                         </p>
                       </div>
